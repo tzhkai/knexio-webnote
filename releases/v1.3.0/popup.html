@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>网页摘要笔记</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{width:420px;min-height:600px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#fafafa}
+        .tab{display:none;padding:12px}
+        .tab.active{display:block}
+        .nav{display:flex;background:#2c3e50;position:sticky;top:0}
+        .nav button{flex:1;padding:12px 8px;border:none;background:transparent;color:#95a5a6;cursor:pointer;font-size:13px;transition:all .2s}
+        .nav button:hover{background:#34495e;color:#ecf0f1}
+        .nav button.active{background:#3498db;color:#fff}
+        .tab-item{display:flex;align-items:center;padding:8px 10px;margin:4px 0;background:#fff;border-radius:6px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1);transition:all .2s}
+        .tab-item:hover{box-shadow:0 2px 8px rgba(0,0,0,.15);transform:translateY(-1px)}
+        .tab-item img{width:16px;height:16px;margin-right:10px;border-radius:2px}
+        .tab-item span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;color:#333}
+        .close-btn{color:#e74c3c;font-weight:bold;margin-left:8px;padding:2px 6px;border-radius:3px}
+        .close-btn:hover{background:#fee}
+        textarea,.content-box{width:100%;border:1px solid #ddd;border-radius:6px;padding:12px;font-size:14px;line-height:1.6;resize:vertical}
+        textarea{height:250px}
+        .content-box{height:350px;overflow-y:auto;background:#fff}
+        .summary-result{height:250px;overflow-y:auto;background:#fffbeb;border:1px solid #fce588;border-radius:6px;padding:12px;font-size:13px;line-height:1.7}
+        h3{font-size:15px;color:#2c3e50;margin-bottom:10px;font-weight:600}
+        .btn{padding:10px 16px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:500;transition:all .2s;margin:4px}
+        .btn-primary{background:#3498db;color:#fff}
+        .btn-primary:hover{background:#2980b9}
+        .btn-secondary{background:#ecf0f1;color:#2c3e50}
+        .btn-secondary:hover{background:#bdc3c7}
+        .btn-success{background:#27ae60;color:#fff}
+        .btn-success:hover{background:#219a52}
+        .btn-row{margin-top:10px;display:flex;flex-wrap:wrap;gap:4px}
+        .status{font-size:12px;color:#7f8c8d;margin-top:8px}
+        .article-meta{font-size:12px;color:#7f8c8d;margin-bottom:10px;padding:8px;background:#ecf0f1;border-radius:4px}
+        .loading{text-align:center;padding:20px;color:#3498db}
+        .empty-state{text-align:center;padding:40px 20px;color:#95a5a6}
+        .tool-section{margin-bottom:16px}
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <button class="nav-btn active" data-tab="tabs">标签页</button>
+        <button class="nav-btn" data-tab="notes">笔记</button>
+        <button class="nav-btn" data-tab="screenshot">截屏</button>
+        <button class="nav-btn" data-tab="article">摘要</button>
+        <button class="nav-btn" data-tab="history">历史</button>
+    </div>
+
+    <div id="tabs" class="tab active">
+        <h3>打开的标签页</h3>
+        <div id="tab-list"></div>
+        <div class="btn-row">
+            <button class="btn btn-secondary" id="close-all-tabs" data-action="close-all">关闭其他标签</button>
+            <button class="btn btn-secondary" id="group-by-domain" data-action="group">按网站分组</button>
+        </div>
+    </div>
+
+    <div id="notes" class="tab">
+        <h3>笔记</h3>
+        <textarea id="note-content" placeholder="在此输入笔记内容..."></textarea>
+        <div class="btn-row">
+            <button class="btn btn-primary" id="save-note" data-action="save-note">💾 保存</button>
+            <button class="btn btn-secondary" id="load-note" data-action="load-note">📂 加载</button>
+            <button class="btn btn-secondary" id="clear-note" data-action="clear-note">🗑️ 清空</button>
+        </div>
+        <div class="btn-row" style="margin-top:6px">
+            <button class="btn btn-success" id="export-file" data-action="export-file">📁 导出到文件</button>
+            <button class="btn btn-secondary" id="import-file" data-action="import-file">📥 导入文件</button>
+        </div>
+        <div id="file-path" style="font-size:11px;color:#7f8c8d;margin-top:8px;display:none">
+            📍 保存位置: <span id="saved-path"></span>
+        </div>
+        <div class="status" id="note-status"></div>
+    </div>
+
+    <div id="screenshot" class="tab">
+        <h3>截屏工具</h3>
+        <div class="btn-row">
+            <button class="btn btn-primary" id="capture-visible" data-action="capture-visible">📷 截取可见区域</button>
+            <button class="btn btn-success" id="capture-fullpage" data-action="capture-fullpage">📄 截取完整页面</button>
+        </div>
+        <div id="screenshot-result" style="margin-top:12px"></div>
+    </div>
+
+    <div id="article" class="tab">
+        <h3>文章摘要与全文提取</h3>
+        <div class="article-meta" id="article-meta">点击下方按钮提取当前页面内容</div>
+        <div class="tool-section">
+            <button class="btn btn-primary" id="extract-article" data-action="extract-article">📝 提取全文</button>
+            <button class="btn btn-success" id="generate-summary" data-action="generate-summary">✨ 生成摘要</button>
+            <button class="btn btn-secondary" id="copy-article" data-action="copy-article">📋 复制全文</button>
+        </div>
+        <div class="content-box" id="article-content">
+            <div class="empty-state">点击"提取全文"获取当前页面内容</div>
+        </div>
+        <div id="summary-section" style="margin-top:12px;display:none">
+            <h3>智能摘要</h3>
+            <div class="summary-result" id="summary-result"></div>
+            <div class="btn-row">
+                <button class="btn btn-secondary" id="copy-summary" data-action="copy-summary">📋 复制摘要</button>
+                <button class="btn btn-secondary" id="save-summary-note" data-action="save-summary-note">💾 保存到笔记</button>
+            </div>
+        </div>
+        <div class="btn-row" style="margin-top:12px">
+            <button class="btn btn-success" id="export-article" data-action="export-article">📁 导出全文(MD)</button>
+            <button class="btn btn-success" id="export-summary" data-action="export-summary">📁 导出摘要(MD)</button>
+        </div>
+        <div id="article-status" class="status"></div>
+    </div>
+
+    <div id="history" class="tab">
+        <h3>历史记录</h3>
+        <div class="btn-row">
+            <button class="btn btn-secondary" id="clear-history" data-action="clear-history">🗑️ 清空历史</button>
+        </div>
+        <div id="history-list" style="margin-top:10px;max-height:550px;overflow-y:auto;">
+            <div class="empty-state">暂无历史记录</div>
+        </div>
+        <div id="history-detail" class="content-box" style="display:none;margin-top:12px;height:350px;">
+            <div style="padding:8px;background:#ecf0f1;border-radius:4px;margin-bottom:8px;">
+                <strong id="detail-title"></strong>
+                <div id="detail-meta" style="font-size:11px;color:#7f8c8d;margin-top:4px;"></div>
+            </div>
+            <div id="detail-content" style="white-space:pre-wrap;font-size:13px;line-height:1.7;"></div>
+        </div>
+        <div class="btn-row" id="detail-actions" style="display:none;margin-top:8px;">
+            <button class="btn btn-secondary" id="copy-detail" data-action="copy-detail">📋 复制</button>
+            <button class="btn btn-secondary" id="export-detail" data-action="export-detail">📁 导出MD</button>
+            <button class="btn btn-secondary" id="delete-detail" data-action="delete-detail">🗑️ 删除</button>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

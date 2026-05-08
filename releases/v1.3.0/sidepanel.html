@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>网页摘要笔记</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        /* Knexio品牌色变量 */
+        :root{
+            --knexio-primary:#6366f1;
+            --knexio-primary-dark:#4f46e5;
+            --knexio-primary-light:#818cf8;
+            --knexio-dark:#1e1b4b;
+            --knexio-darker:#0f0e2a;
+            --knexio-light:#e0e7ff;
+            --knexio-accent:#06b6d4;
+        }
+        /* 侧边栏模式：无固定宽度，body自适应 */
+        html,body{height:100%;overflow:hidden}
+        body{width:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#fafafa;display:flex;flex-direction:column}
+        .container{flex:1;display:flex;flex-direction:column;overflow:hidden;padding:12px}
+        /* Knexio品牌导航栏 */
+        .nav{display:flex;background:var(--knexio-dark);flex-shrink:0}
+        .nav button{flex:1;padding:12px 8px;border:none;background:transparent;color:#a5b4fc;cursor:pointer;font-size:13px;transition:all .2s}
+        .nav button:hover{background:var(--knexio-darker);color:#fff}
+        .nav button.active{background:var(--knexio-primary);color:#fff}
+        .tab{display:none;flex:1;overflow-y:auto;min-height:0}
+        .tab.active{display:flex;flex-direction:column}
+        .tab-content{flex:1;overflow-y:auto;min-height:0}
+        .tab-item{display:flex;align-items:center;padding:8px 10px;margin:4px 0;background:#fff;border-radius:6px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1);transition:all .2s}
+        .tab-item:hover{box-shadow:0 2px 8px rgba(0,0,0,.15);transform:translateY(-1px)}
+        .tab-item img{width:16px;height:16px;margin-right:10px;border-radius:2px;flex-shrink:0}
+        .tab-item span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;color:#333}
+        .close-btn{color:#e74c3c;font-weight:bold;margin-left:8px;padding:2px 6px;border-radius:3px;flex-shrink:0}
+        .close-btn:hover{background:#fee}
+        textarea{width:100%;height:200px;min-height:150px;border:1px solid #ddd;border-radius:6px;padding:12px;font-size:14px;line-height:1.6;resize:vertical;display:block;flex:none}
+        .content-box{flex:1;min-height:200px;overflow-y:auto;background:#fff}
+        .summary-result{flex:1;min-height:150px;overflow-y:auto;background:var(--knexio-light);border:1px solid var(--knexio-primary-light);border-radius:6px;padding:12px;font-size:13px;line-height:1.7}
+        h3{font-size:15px;color:var(--knexio-dark);margin-bottom:10px;font-weight:600;flex-shrink:0}
+        .btn{padding:10px 16px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:500;transition:all .2s;margin:4px}
+        .btn-primary{background:var(--knexio-primary);color:#fff}
+        .btn-primary:hover{background:var(--knexio-primary-dark)}
+        .btn-secondary{background:#e0e7ff;color:var(--knexio-dark)}
+        .btn-secondary:hover{background:#c7d2fe}
+        .btn-success{background:#10b981;color:#fff}
+        .btn-success:hover{background:#059669}
+        .btn-row{margin-top:10px;display:flex;flex-wrap:wrap;gap:4px;flex-shrink:0}
+        .status{font-size:12px;color:#7f8c8d;margin-top:8px}
+        .article-meta{font-size:12px;color:#7f8c8d;margin-bottom:10px;padding:8px;background:var(--knexio-light);border-radius:4px;flex-shrink:0}
+        .loading{text-align:center;padding:20px;color:var(--knexio-primary)}
+        .empty-state{text-align:center;padding:40px 20px;color:#95a5a6}
+        .tool-section{margin-bottom:16px;flex-shrink:0}
+        .tab-footer{flex-shrink:0;padding-bottom:8px}
+        /* 品牌推广区 */
+        .brand-footer{background:var(--knexio-darker);padding:10px 16px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;font-size:12px;flex-shrink:0}
+        .brand-text{color:#a5b4fc}
+        .brand-logo{font-weight:700;font-size:14px;color:var(--knexio-primary-light);letter-spacing:1px}
+        .brand-link{color:var(--knexio-accent);text-decoration:none;font-weight:500}
+        .brand-link:hover{color:#22d3ee;text-decoration:underline}
+        .brand-links{display:flex;gap:8px;align-items:center;margin-left:12px;padding-left:12px;border-left:1px solid #3730a3}
+        .brand-links a{color:#a5b4fc;text-decoration:none;font-size:11px}
+        .brand-links a:hover{color:#fff}
+        .brand-links span{color:#4f46e5}
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <button class="nav-btn active" data-tab="tabs">标签页</button>
+        <button class="nav-btn" data-tab="screenshot">截屏</button>
+        <button class="nav-btn" data-tab="notes">笔记</button>
+        <button class="nav-btn" data-tab="article">摘要</button>
+        <button class="nav-btn" data-tab="history">历史</button>
+    </div>
+
+    <div class="container">
+        <div id="tabs" class="tab active">
+            <h3>打开的标签页</h3>
+            <div class="tab-content">
+                <div id="tab-list"></div>
+            </div>
+            <div class="btn-row">
+                <button class="btn btn-secondary" data-action="close-all">关闭其他标签</button>
+                <button class="btn btn-secondary" data-action="group">按网站分组</button>
+            </div>
+        </div>
+
+        <div id="screenshot" class="tab">
+            <h3>截屏工具</h3>
+            <div class="btn-row">
+                <button class="btn btn-primary" data-action="capture-visible">📷 截取可见区域</button>
+                <button class="btn btn-success" data-action="capture-fullpage">📄 截取完整页面</button>
+            </div>
+            <div id="screenshot-result" style="margin-top:12px;flex:1;overflow:auto;"></div>
+        </div>
+
+        <div id="notes" class="tab">
+            <h3>笔记</h3>
+            <textarea id="note-content" placeholder="在此输入笔记内容..."></textarea>
+            <div class="btn-row">
+                <button class="btn btn-primary" data-action="save-note">💾 保存</button>
+                <button class="btn btn-secondary" data-action="load-note">📂 加载</button>
+                <button class="btn btn-secondary" data-action="clear-note">🗑️ 清空</button>
+                <button class="btn btn-success" data-action="export-file">📁 导出</button>
+                <button class="btn btn-secondary" data-action="import-file">📥 导入</button>
+            </div>
+            <div id="file-path" style="font-size:11px;color:#7f8c8d;margin-top:8px;display:none">
+                📍 保存位置: <span id="saved-path"></span>
+            </div>
+            <div class="status" id="note-status"></div>
+        </div>
+
+        <div id="article" class="tab">
+            <h3>文章摘要与全文提取</h3>
+            <div class="article-meta" id="article-meta">点击下方按钮提取当前页面内容</div>
+            <div class="tool-section">
+                <button class="btn btn-primary" data-action="extract-article">📝 提取全文</button>
+                <button class="btn btn-success" data-action="generate-summary">✨ 生成摘要</button>
+                <button class="btn btn-secondary" data-action="copy-article">📋 复制全文</button>
+            </div>
+            <div class="content-box" id="article-content">
+                <div class="empty-state">点击"提取全文"获取当前页面内容</div>
+            </div>
+            <div id="summary-section" style="margin-top:12px;display:none;flex-direction:column">
+                <h3>智能摘要</h3>
+                <div class="summary-result" id="summary-result"></div>
+                <div class="btn-row">
+                    <button class="btn btn-secondary" data-action="copy-summary">📋 复制摘要</button>
+                    <button class="btn btn-secondary" data-action="save-summary-note">💾 保存到笔记</button>
+                </div>
+            </div>
+            <div class="btn-row" style="margin-top:12px">
+                <button class="btn btn-success" data-action="export-article">📁 导出全文(MD)</button>
+                <button class="btn btn-success" data-action="export-summary">📁 导出摘要(MD)</button>
+                <button class="btn btn-secondary" data-action="send-article-knexio">⭐ 收藏到knexio</button>
+            </div>
+            <div id="article-status" class="status"></div>
+        </div>
+
+        <div id="history" class="tab">
+            <h3>历史记录</h3>
+            <div class="btn-row">
+                <button class="btn btn-secondary" data-action="clear-history">🗑️ 清空历史</button>
+            </div>
+            <div id="history-list" style="margin-top:10px;max-height:300px;overflow-y:auto;flex:1;min-height:0;">
+                <div class="empty-state">暂无历史记录</div>
+            </div>
+            <div id="history-detail" class="content-box" style="display:none;margin-top:12px;min-height:200px;">
+                <div style="padding:8px;background:#ecf0f1;border-radius:4px;margin-bottom:8px;">
+                    <strong id="detail-title"></strong>
+                    <div id="detail-meta" style="font-size:11px;color:#7f8c8d;margin-top:4px;"></div>
+                </div>
+                <div id="detail-content" style="white-space:pre-wrap;font-size:13px;line-height:1.7;"></div>
+            </div>
+            <div class="btn-row" id="detail-actions" style="display:none;margin-top:8px;">
+                <button class="btn btn-secondary" data-action="copy-detail">📋 复制</button>
+                <button class="btn btn-secondary" data-action="export-detail">📁 导出MD</button>
+                <button class="btn btn-secondary" data-action="delete-detail">🗑️ 删除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 品牌推广区 -->
+    <div class="brand-footer">
+        <span class="brand-logo">KNEXIO</span>
+        <span class="brand-text">Tools ·</span>
+        <span style="background:#10b981;color:#fff;font-size:10px;padding:2px 6px;border-radius:3px;font-weight:600;">免费</span>
+        <a href="https://knexio.xyz" target="_blank" class="brand-link">官网</a>
+        <div class="brand-links">
+            <a href="https://knexio.xyz/tools" target="_blank">工具导航</a>
+            <span>·</span>
+            <a href="https://knexio.xyz/finance" target="_blank">财务工具</a>
+            <span>·</span>
+            <a href="https://knexio.xyz/games" target="_blank">网页游戏</a>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
