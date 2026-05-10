@@ -5,7 +5,6 @@
     <title>网页摘要笔记</title>
     <style>
         *{box-sizing:border-box;margin:0;padding:0}
-        /* Knexio品牌色变量 */
         :root{
             --knexio-primary:#6366f1;
             --knexio-primary-dark:#4f46e5;
@@ -15,11 +14,9 @@
             --knexio-light:#e0e7ff;
             --knexio-accent:#06b6d4;
         }
-        /* 侧边栏模式：无固定宽度，body自适应 */
         html,body{height:100%;overflow:hidden}
         body{width:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#fafafa;display:flex;flex-direction:column}
         .container{flex:1;display:flex;flex-direction:column;overflow:hidden;padding:12px}
-        /* Knexio品牌导航栏 */
         .nav{display:flex;background:var(--knexio-dark);flex-shrink:0}
         .nav button{flex:1;padding:12px 8px;border:none;background:transparent;color:#a5b4fc;cursor:pointer;font-size:13px;transition:all .2s}
         .nav button:hover{background:var(--knexio-darker);color:#fff}
@@ -45,13 +42,13 @@
         .btn-success{background:#10b981;color:#fff}
         .btn-success:hover{background:#059669}
         .btn-row{margin-top:10px;display:flex;flex-wrap:wrap;gap:4px;flex-shrink:0}
+        .btn-row .btn{flex:1;min-width:0}
         .status{font-size:12px;color:#7f8c8d;margin-top:8px}
         .article-meta{font-size:12px;color:#7f8c8d;margin-bottom:10px;padding:8px;background:var(--knexio-light);border-radius:4px;flex-shrink:0}
         .loading{text-align:center;padding:20px;color:var(--knexio-primary)}
         .empty-state{text-align:center;padding:40px 20px;color:#95a5a6}
         .tool-section{margin-bottom:16px;flex-shrink:0}
         .tab-footer{flex-shrink:0;padding-bottom:8px}
-        /* 品牌推广区 */
         .brand-footer{background:var(--knexio-darker);padding:10px 16px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;font-size:12px;flex-shrink:0}
         .brand-text{color:#a5b4fc}
         .brand-logo{font-weight:700;font-size:14px;color:var(--knexio-primary-light);letter-spacing:1px}
@@ -65,84 +62,84 @@
 </head>
 <body>
     <div class="nav">
-        <button class="nav-btn active" data-tab="tabs">标签页</button>
-        <button class="nav-btn" data-tab="screenshot">截屏</button>
-        <button class="nav-btn" data-tab="notes">笔记</button>
-        <button class="nav-btn" data-tab="article">摘要</button>
-        <button class="nav-btn" data-tab="history">历史</button>
+        <button class="nav-btn active" data-tab="tabs" data-i18n="tab_tabs"></button>
+        <button class="nav-btn" data-tab="screenshot" data-i18n="tab_screenshot"></button>
+        <button class="nav-btn" data-tab="notes" data-i18n="tab_notes"></button>
+        <button class="nav-btn" data-tab="article" data-i18n="tab_article"></button>
+        <button class="nav-btn" data-tab="history" data-i18n="tab_history"></button>
     </div>
 
     <div class="container">
         <div id="tabs" class="tab active">
-            <h3>打开的标签页</h3>
+            <h3 data-i18n="openTabs"></h3>
             <div class="tab-content">
-                <div id="tab-list"></div>
+                <div id="tab-list">
+                    <div class="empty-state" data-i18n="noTabs"></div>
+                </div>
             </div>
             <div class="btn-row">
-                <button class="btn btn-secondary" data-action="close-all">关闭其他标签</button>
-                <button class="btn btn-secondary" data-action="group">按网站分组</button>
+                <button class="btn btn-secondary" data-action="close-all" data-i18n="closeOthers"></button>
+                <button class="btn btn-secondary" data-action="group" data-i18n="groupByDomain"></button>
             </div>
         </div>
 
         <div id="screenshot" class="tab">
-            <h3>截屏工具</h3>
+            <h3 data-i18n="screenshotTool"></h3>
             <div class="btn-row">
-                <button class="btn btn-primary" data-action="capture-visible">📷 截取可见区域</button>
-                <button class="btn btn-success" data-action="capture-fullpage">📄 截取完整页面</button>
+                <button class="btn btn-primary" data-action="capture-visible" data-i18n="captureVisible"></button>
+                <button class="btn btn-success" data-action="capture-fullpage" data-i18n="captureFullPage"></button>
             </div>
             <div id="screenshot-result" style="margin-top:12px;flex:1;overflow:auto;"></div>
         </div>
 
         <div id="notes" class="tab">
-            <h3>笔记</h3>
-            <textarea id="note-content" placeholder="在此输入笔记内容..."></textarea>
+            <h3 data-i18n="notes"></h3>
+            <textarea id="note-content" data-i18n-placeholder="notePlaceholder"></textarea>
             <div class="btn-row">
-                <button class="btn btn-primary" data-action="save-note">💾 保存</button>
-                <button class="btn btn-secondary" data-action="load-note">📂 加载</button>
-                <button class="btn btn-secondary" data-action="clear-note">🗑️ 清空</button>
-                <button class="btn btn-success" data-action="export-file">📁 导出</button>
-                <button class="btn btn-secondary" data-action="import-file">📥 导入</button>
+                <button class="btn btn-primary" data-action="save-note" data-i18n="save"></button>
+                <button class="btn btn-secondary" data-action="load-note" data-i18n="load"></button>
+                <button class="btn btn-secondary" data-action="clear-note" data-i18n="clear"></button>
+                <button class="btn btn-success" data-action="export-file" data-i18n="export"></button>
+                <button class="btn btn-secondary" data-action="import-file" data-i18n="import"></button>
             </div>
             <div id="file-path" style="font-size:11px;color:#7f8c8d;margin-top:8px;display:none">
-                📍 保存位置: <span id="saved-path"></span>
+                <span data-i18n="savedAt"></span>: <span id="saved-path"></span>
             </div>
             <div class="status" id="note-status"></div>
         </div>
 
         <div id="article" class="tab">
-            <h3>文章摘要与全文提取</h3>
-            <div class="article-meta" id="article-meta">点击下方按钮提取当前页面内容</div>
+            <h3 data-i18n="articleExtract"></h3>
+            <div class="article-meta" id="article-meta" data-i18n="clickToExtract"></div>
             <div class="tool-section">
-                <button class="btn btn-primary" data-action="extract-article">📝 提取全文</button>
-                <button class="btn btn-success" data-action="generate-summary">✨ 生成摘要</button>
-                <button class="btn btn-secondary" data-action="copy-article">📋 复制全文</button>
-            </div>
-            <div class="content-box" id="article-content">
-                <div class="empty-state">点击"提取全文"获取当前页面内容</div>
-            </div>
-            <div id="summary-section" style="margin-top:12px;display:none;flex-direction:column">
-                <h3>智能摘要</h3>
-                <div class="summary-result" id="summary-result"></div>
                 <div class="btn-row">
-                    <button class="btn btn-secondary" data-action="copy-summary">📋 复制摘要</button>
-                    <button class="btn btn-secondary" data-action="save-summary-note">💾 保存到笔记</button>
+                <button class="btn btn-primary" data-action="extract-article" data-i18n="extractArticle"></button>
+                <button class="btn btn-success" data-action="generate-summary" data-i18n="generateSummary"></button>
+                <button class="btn btn-primary" data-action="edit-full-md" data-i18n="editFullMd"></button>
+                <button class="btn btn-primary" data-action="export-article" data-i18n="exportArticle"></button>
                 </div>
             </div>
-            <div class="btn-row" style="margin-top:12px">
-                <button class="btn btn-success" data-action="export-article">📁 导出全文(MD)</button>
-                <button class="btn btn-success" data-action="export-summary">📁 导出摘要(MD)</button>
-                <button class="btn btn-secondary" data-action="send-article-knexio">⭐ 收藏到knexio</button>
+            <div class="content-box" id="article-content">
+                <div class="empty-state" data-i18n="clickToExtract"></div>
             </div>
-            <div id="article-status" class="status"></div>
+            <div id="summary-section" style="margin-top:12px;display:none;flex-direction:column">
+                <h3 data-i18n="smartSummary"></h3>
+                <div class="summary-result" id="summary-result" data-i18n="clickToSummary"></div>
+                <div class="btn-row" style="margin-top:8px;">
+                    <button class="btn btn-success" data-action="edit-summary-md" data-i18n="editSummaryMd"></button>
+                    <button class="btn btn-success" data-action="export-summary" data-i18n="exportSummary"></button>
+                </div>
+            </div>
+            <div class="status" id="article-status"></div>
         </div>
 
         <div id="history" class="tab">
-            <h3>历史记录</h3>
+            <h3 data-i18n="history"></h3>
             <div class="btn-row">
-                <button class="btn btn-secondary" data-action="clear-history">🗑️ 清空历史</button>
+                <button class="btn btn-secondary" data-action="clear-history" data-i18n="clearHistory"></button>
             </div>
             <div id="history-list" style="margin-top:10px;max-height:300px;overflow-y:auto;flex:1;min-height:0;">
-                <div class="empty-state">暂无历史记录</div>
+                <div class="empty-state" data-i18n="noHistory"></div>
             </div>
             <div id="history-detail" class="content-box" style="display:none;margin-top:12px;min-height:200px;">
                 <div style="padding:8px;background:#ecf0f1;border-radius:4px;margin-bottom:8px;">
@@ -152,28 +149,28 @@
                 <div id="detail-content" style="white-space:pre-wrap;font-size:13px;line-height:1.7;"></div>
             </div>
             <div class="btn-row" id="detail-actions" style="display:none;margin-top:8px;">
-                <button class="btn btn-secondary" data-action="copy-detail">📋 复制</button>
-                <button class="btn btn-secondary" data-action="export-detail">📁 导出MD</button>
-                <button class="btn btn-secondary" data-action="delete-detail">🗑️ 删除</button>
+                <button class="btn btn-secondary" data-action="copy-detail" data-i18n="copy"></button>
+                <button class="btn btn-secondary" data-action="export-detail" data-i18n="exportMD"></button>
+                <button class="btn btn-secondary" data-action="delete-detail" data-i18n="delete"></button>
             </div>
         </div>
     </div>
 
-    <!-- 品牌推广区 -->
     <div class="brand-footer">
-        <span class="brand-logo">KNEXIO</span>
-        <span class="brand-text">Tools ·</span>
-        <span style="background:#10b981;color:#fff;font-size:10px;padding:2px 6px;border-radius:3px;font-weight:600;">免费</span>
-        <a href="https://knexio.xyz" target="_blank" class="brand-link">官网</a>
+        <span class="brand-logo" data-i18n="brand"></span>
+        <span class="brand-text"> · </span>
+        <span style="background:#10b981;color:#fff;font-size:10px;padding:2px 6px;border-radius:3px;font-weight:600;" data-i18n="brandFree"></span>
+        <a href="https://knexio.xyz" target="_blank" class="brand-link" data-i18n="brandOfficial"></a>
         <div class="brand-links">
-            <a href="https://knexio.xyz/tools" target="_blank">工具导航</a>
+            <a href="https://knexio.xyz/tools" target="_blank" data-i18n="brandToolsNav"></a>
             <span>·</span>
-            <a href="https://knexio.xyz/finance" target="_blank">财务工具</a>
+            <a href="https://knexio.xyz/finance" target="_blank" data-i18n="brandFinance"></a>
             <span>·</span>
-            <a href="https://knexio.xyz/games" target="_blank">网页游戏</a>
+            <a href="https://knexio.xyz/games" target="_blank" data-i18n="brandGames"></a>
         </div>
     </div>
 
+    <script src="i18n.js"></script>
     <script src="popup.js"></script>
 </body>
 </html>

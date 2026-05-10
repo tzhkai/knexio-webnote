@@ -1,0 +1,311 @@
+{
+  "extensionName": {
+    "message": "knexio WebNote - Web Summary & Notes",
+    "description": "Extension name"
+  },
+  "extensionDesc": {
+    "message": "knexio official web summary & notes extension - tab management, screenshot, article extraction and note saving",
+    "description": "Extension description"
+  },
+  "tab_tabs": {
+    "message": "Tabs",
+    "description": "Tab name"
+  },
+  "tab_screenshot": {
+    "message": "Screenshot",
+    "description": "Tab name"
+  },
+  "tab_notes": {
+    "message": "Notes",
+    "description": "Tab name"
+  },
+  "tab_article": {
+    "message": "Summary",
+    "description": "Tab name"
+  },
+  "tab_history": {
+    "message": "History",
+    "description": "Tab name"
+  },
+  "openTabs": {
+    "message": "Open Tabs",
+    "description": "Section title"
+  },
+  "noTabs": {
+    "message": "No open tabs",
+    "description": "Empty state"
+  },
+  "loadFailed": {
+    "message": "Load failed",
+    "description": "Error message"
+  },
+  "closeOthers": {
+    "message": "Close Others",
+    "description": "Button text"
+  },
+  "groupByDomain": {
+    "message": "Group by Site",
+    "description": "Button text"
+  },
+  "notes": {
+    "message": "Notes",
+    "description": "Section title"
+  },
+  "notePlaceholder": {
+    "message": "Enter your notes here...",
+    "description": "Textarea placeholder"
+  },
+  "save": {
+    "message": "Save",
+    "description": "Button text"
+  },
+  "load": {
+    "message": "Load",
+    "description": "Button text"
+  },
+  "clear": {
+    "message": "Clear",
+    "description": "Button text"
+  },
+  "export": {
+    "message": "Export to File",
+    "description": "Button text"
+  },
+  "import": {
+    "message": "Import File",
+    "description": "Button text"
+  },
+  "savedAt": {
+    "message": "Saved at",
+    "description": "Saved file path label"
+  },
+  "screenshotTool": {
+    "message": "Screenshot Tool",
+    "description": "Section title"
+  },
+  "captureVisible": {
+    "message": "Capture Visible",
+    "description": "Button text"
+  },
+  "captureFullPage": {
+    "message": "Capture Full Page",
+    "description": "Button text"
+  },
+  "articleExtract": {
+    "message": "Article Summary & Extraction",
+    "description": "Section title"
+  },
+  "clickToExtract": {
+    "message": "Click the button below to extract current page content",
+    "description": "Meta text"
+  },
+  "extractArticle": {
+    "message": "Extract Full Text",
+    "description": "Button text"
+  },
+  "generateSummary": {
+    "message": "Generate Summary",
+    "description": "Button text"
+  },
+  "copyArticle": {
+    "message": "Copy Full Text",
+    "description": "Button text"
+  },
+  "smartSummary": {
+    "message": "Smart Summary",
+    "description": "Section title"
+  },
+  "clickToSummary": {
+    "message": "Click 'Generate Summary' to get smart summary",
+    "description": "Placeholder text"
+  },
+  "copySummary": {
+    "message": "Copy Summary",
+    "description": "Button text"
+  },
+  "saveToNote": {
+    "message": "Save to Notes",
+    "description": "Button text"
+  },
+  "exportArticle": {
+    "message": "Export Full Text (MD)",
+    "description": "Button text"
+  },
+  "exportSummary": {
+    "message": "Export Summary (MD)",
+    "description": "Button text"
+  },
+  "history": {
+    "message": "History",
+    "description": "Section title"
+  },
+  "noHistory": {
+    "message": "No history yet",
+    "description": "Empty state"
+  },
+  "clearHistory": {
+    "message": "Clear History",
+    "description": "Button text"
+  },
+  "copied": {
+    "message": "Copied to clipboard",
+    "description": "Status message"
+  },
+  "saved": {
+    "message": "Saved",
+    "description": "Status message"
+  },
+  "loaded": {
+    "message": "Loaded",
+    "description": "Status message"
+  },
+  "cleared": {
+    "message": "Cleared",
+    "description": "Status message"
+  },
+  "noteEmpty": {
+    "message": "Note is empty, nothing to export",
+    "description": "Error message"
+  },
+  "confirmClear": {
+    "message": "Are you sure you want to clear the note?",
+    "description": "Confirm dialog"
+  },
+  "confirmClearHistory": {
+    "message": "Are you sure you want to clear all history?",
+    "description": "Confirm dialog"
+  },
+  "confirmDelete": {
+    "message": "Are you sure you want to delete this record?",
+    "description": "Confirm dialog"
+  },
+  "extracting": {
+    "message": "Extracting article content...",
+    "description": "Loading text"
+  },
+  "capturing": {
+    "message": "Capturing...",
+    "description": "Loading text"
+  },
+  "capturingFull": {
+    "message": "Capturing full page...",
+    "description": "Loading text"
+  },
+  "generating": {
+    "message": "Generating summary...",
+    "description": "Loading text"
+  },
+  "extractedChars": {
+    "message": "Extracted $1 characters",
+    "description": "Status message, $1 is character count",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+  "extractFailed": {
+    "message": "Unable to extract article content",
+    "description": "Error message"
+  },
+  "extractFailedReason": {
+    "message": "Possible reasons: page requires login; page uses special loading techniques; main content is in an iframe",
+    "description": "Error detail"
+  },
+  "pleaseExtractFirst": {
+    "message": "Please extract article content first",
+    "description": "Warning message"
+  },
+  "pleaseGenerateFirst": {
+    "message": "Please generate a summary first",
+    "description": "Warning message"
+  },
+  "screenshotFailed": {
+    "message": "Screenshot failed",
+    "description": "Error message"
+  },
+  "fullScreenshotFailed": {
+    "message": "Full page screenshot failed",
+    "description": "Error message"
+  },
+  "copyFailed": {
+    "message": "Copy failed",
+    "description": "Error message"
+  },
+  "saveFailed": {
+    "message": "Save failed",
+    "description": "Error message"
+  },
+  "exportFailed": {
+    "message": "Export failed",
+    "description": "Error message"
+  },
+  "deleteFailed": {
+    "message": "Delete failed",
+    "description": "Error message"
+  },
+  "autoSaved": {
+    "message": "Auto-saved",
+    "description": "Status message"
+  },
+  "exportedToHistory": {
+    "message": "Exported and saved to history",
+    "description": "Status message"
+  },
+  "savedToNoteAndHistory": {
+    "message": "Saved to notes and history",
+    "description": "Status message"
+  },
+  "source": {
+    "message": "Source",
+    "description": "Label"
+  },
+  "date": {
+    "message": "Date",
+    "description": "Label"
+  },
+  "copy": {
+    "message": "Copy",
+    "description": "Button text"
+  },
+  "exportMD": {
+    "message": "Export MD",
+    "description": "Button text"
+  },
+  "delete": {
+    "message": "Delete",
+    "description": "Button text"
+  },
+  "noTitle": {
+    "message": "Untitled",
+    "description": "Default title"
+  },
+  "unknownDomain": {
+    "message": "Unknown Site",
+    "description": "Fallback domain name"
+  },
+  "brand": {
+    "message": "KNEXIO",
+    "description": "Brand name"
+  },
+  "brandTools": {
+    "message": "Tools",
+    "description": "Brand suffix"
+  },
+  "brandFree": {
+    "message": "Free",
+    "description": "Free tag"
+  },
+  "brandOfficial": {
+    "message": "Official Site",
+    "description": "Link text"
+  },
+  "brandToolsNav": {
+    "message": "Tools Nav",
+    "description": "Link text"
+  },
+  "brandFinance": {
+    "message": "Finance Tools",
+    "description": "Link text"
+  },
+  "brandGames": {
+    "message": "Web Games",
+    "description": "Link text"
+  }
+}

@@ -1,0 +1,311 @@
+{
+  "extensionName": {
+    "message": "knexio WebNote 网页摘要笔记",
+    "description": "Extension name"
+  },
+  "extensionDesc": {
+    "message": "knexio官方网页摘要笔记插件 - 标签页管理、截屏、文章摘要提取与笔记保存，一键整理网页内容",
+    "description": "Extension description"
+  },
+  "tab_tabs": {
+    "message": "标签页",
+    "description": "Tab name"
+  },
+  "tab_screenshot": {
+    "message": "截屏",
+    "description": "Tab name"
+  },
+  "tab_notes": {
+    "message": "笔记",
+    "description": "Tab name"
+  },
+  "tab_article": {
+    "message": "摘要",
+    "description": "Tab name"
+  },
+  "tab_history": {
+    "message": "历史",
+    "description": "Tab name"
+  },
+  "openTabs": {
+    "message": "打开的标签页",
+    "description": "Section title"
+  },
+  "noTabs": {
+    "message": "没有打开的标签页",
+    "description": "Empty state"
+  },
+  "loadFailed": {
+    "message": "加载失败",
+    "description": "Error message"
+  },
+  "closeOthers": {
+    "message": "关闭其他标签",
+    "description": "Button text"
+  },
+  "groupByDomain": {
+    "message": "按网站分组",
+    "description": "Button text"
+  },
+  "notes": {
+    "message": "笔记",
+    "description": "Section title"
+  },
+  "notePlaceholder": {
+    "message": "在此输入笔记内容...",
+    "description": "Textarea placeholder"
+  },
+  "save": {
+    "message": "保存",
+    "description": "Button text"
+  },
+  "load": {
+    "message": "加载",
+    "description": "Button text"
+  },
+  "clear": {
+    "message": "清空",
+    "description": "Button text"
+  },
+  "export": {
+    "message": "导出到文件",
+    "description": "Button text"
+  },
+  "import": {
+    "message": "导入文件",
+    "description": "Button text"
+  },
+  "savedAt": {
+    "message": "保存位置",
+    "description": "Saved file path label"
+  },
+  "screenshotTool": {
+    "message": "截屏工具",
+    "description": "Section title"
+  },
+  "captureVisible": {
+    "message": "截取可见区域",
+    "description": "Button text"
+  },
+  "captureFullPage": {
+    "message": "截取完整页面",
+    "description": "Button text"
+  },
+  "articleExtract": {
+    "message": "文章摘要与全文提取",
+    "description": "Section title"
+  },
+  "clickToExtract": {
+    "message": "点击下方按钮提取当前页面内容",
+    "description": "Meta text"
+  },
+  "extractArticle": {
+    "message": "提取全文",
+    "description": "Button text"
+  },
+  "generateSummary": {
+    "message": "生成摘要",
+    "description": "Button text"
+  },
+  "copyArticle": {
+    "message": "复制全文",
+    "description": "Button text"
+  },
+  "smartSummary": {
+    "message": "智能摘要",
+    "description": "Section title"
+  },
+  "clickToSummary": {
+    "message": "点击\"生成摘要\"获取智能摘要",
+    "description": "Placeholder text"
+  },
+  "copySummary": {
+    "message": "复制摘要",
+    "description": "Button text"
+  },
+  "saveToNote": {
+    "message": "保存到笔记",
+    "description": "Button text"
+  },
+  "exportArticle": {
+    "message": "导出全文(MD)",
+    "description": "Button text"
+  },
+  "exportSummary": {
+    "message": "导出摘要(MD)",
+    "description": "Button text"
+  },
+  "history": {
+    "message": "历史记录",
+    "description": "Section title"
+  },
+  "noHistory": {
+    "message": "暂无历史记录",
+    "description": "Empty state"
+  },
+  "clearHistory": {
+    "message": "清空历史",
+    "description": "Button text"
+  },
+  "copied": {
+    "message": "已复制到剪贴板",
+    "description": "Status message"
+  },
+  "saved": {
+    "message": "已保存",
+    "description": "Status message"
+  },
+  "loaded": {
+    "message": "已加载",
+    "description": "Status message"
+  },
+  "cleared": {
+    "message": "已清空",
+    "description": "Status message"
+  },
+  "noteEmpty": {
+    "message": "笔记为空，无内容可导出",
+    "description": "Error message"
+  },
+  "confirmClear": {
+    "message": "确定要清空笔记吗？",
+    "description": "Confirm dialog"
+  },
+  "confirmClearHistory": {
+    "message": "确定要清空所有历史记录吗？",
+    "description": "Confirm dialog"
+  },
+  "confirmDelete": {
+    "message": "确定要删除这条记录吗？",
+    "description": "Confirm dialog"
+  },
+  "extracting": {
+    "message": "正在提取文章内容...",
+    "description": "Loading text"
+  },
+  "capturing": {
+    "message": "截取中...",
+    "description": "Loading text"
+  },
+  "capturingFull": {
+    "message": "正在截取完整页面...",
+    "description": "Loading text"
+  },
+  "generating": {
+    "message": "正在生成摘要...",
+    "description": "Loading text"
+  },
+  "extractedChars": {
+    "message": "已提取 $1 字",
+    "description": "Status message, $1 is character count",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+  "extractFailed": {
+    "message": "无法提取文章内容",
+    "description": "Error message"
+  },
+  "extractFailedReason": {
+    "message": "可能原因：页面需要登录才能查看；页面使用特殊技术加载；页面主要内容在iframe中",
+    "description": "Error detail"
+  },
+  "pleaseExtractFirst": {
+    "message": "请先提取文章内容",
+    "description": "Warning message"
+  },
+  "pleaseGenerateFirst": {
+    "message": "请先生成摘要",
+    "description": "Warning message"
+  },
+  "screenshotFailed": {
+    "message": "截屏失败",
+    "description": "Error message"
+  },
+  "fullScreenshotFailed": {
+    "message": "完整页面截屏失败",
+    "description": "Error message"
+  },
+  "copyFailed": {
+    "message": "复制失败",
+    "description": "Error message"
+  },
+  "saveFailed": {
+    "message": "保存失败",
+    "description": "Error message"
+  },
+  "exportFailed": {
+    "message": "导出失败",
+    "description": "Error message"
+  },
+  "deleteFailed": {
+    "message": "删除历史失败",
+    "description": "Error message"
+  },
+  "autoSaved": {
+    "message": "已自动保存",
+    "description": "Status message"
+  },
+  "exportedToHistory": {
+    "message": "已导出并保存到历史",
+    "description": "Status message"
+  },
+  "savedToNoteAndHistory": {
+    "message": "已保存到笔记和历史",
+    "description": "Status message"
+  },
+  "source": {
+    "message": "来源",
+    "description": "Label"
+  },
+  "date": {
+    "message": "日期",
+    "description": "Label"
+  },
+  "copy": {
+    "message": "复制",
+    "description": "Button text"
+  },
+  "exportMD": {
+    "message": "导出MD",
+    "description": "Button text"
+  },
+  "delete": {
+    "message": "删除",
+    "description": "Button text"
+  },
+  "noTitle": {
+    "message": "无标题",
+    "description": "Default title"
+  },
+  "unknownDomain": {
+    "message": "未知网站",
+    "description": "Fallback domain name"
+  },
+  "brand": {
+    "message": "KNEXIO",
+    "description": "Brand name"
+  },
+  "brandTools": {
+    "message": "Tools",
+    "description": "Brand suffix"
+  },
+  "brandFree": {
+    "message": "免费",
+    "description": "Free tag"
+  },
+  "brandOfficial": {
+    "message": "官网",
+    "description": "Link text"
+  },
+  "brandToolsNav": {
+    "message": "工具导航",
+    "description": "Link text"
+  },
+  "brandFinance": {
+    "message": "财务工具",
+    "description": "Link text"
+  },
+  "brandGames": {
+    "message": "网页游戏",
+    "description": "Link text"
+  }
+}
